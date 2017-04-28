@@ -13,6 +13,14 @@ I have it working using Ubuntu 16.04
 then create a password!  
 `x11vnc -storepasswd`
 
+## USAGE
+- place the script anywhere
+- you might have to grant exec permissions: `chmod +x vnc_virtual_display_linker.py`
+- launch the script `./vnc_virtual_display_linker.py`
+- press `s` to start the VNC server with the default configuration
+- `ctrl-c` to stop the server
+- follow the instructions on the screen for more functionalities
+
 ## ADB SUPPORT
 If your tablet/phone is supported, you can connect to your device via an USB cable and the ADB platform but you need to install the proper tools first:  
 `sudo apt install adb android-tools-adb android-tools-fastboot`
