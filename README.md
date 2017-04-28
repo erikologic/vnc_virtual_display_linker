@@ -4,7 +4,7 @@
 This script will let you connect an external device to your X11 server as a second monitor through VNC  
 i.e. use your tablet to extend your desktop
 
-I have it working using Ubuntu 16.04
+I have it working using Ubuntu 16.04 and an Android tablet
 
 ## INSTALLATION:
 `pip install dotmap`  
