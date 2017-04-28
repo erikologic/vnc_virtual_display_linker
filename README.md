@@ -1,7 +1,7 @@
 # vnc_virtual_display_linker
 ### A Python script to create a second virtual monitor for connecting with VNC
 
-This script will let you connect an external device to your X11 server as a second monitor thorugh VNC
+This script will let you connect an external device to your X11 server as a second monitor through VNC
 i.e. use your tablet to extend your desktop
 
 I have it working using Ubuntu 16.04
