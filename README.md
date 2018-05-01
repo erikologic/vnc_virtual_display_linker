@@ -17,9 +17,12 @@ then create a password!
 - place the script anywhere
 - you might have to grant exec permissions: `chmod +x vnc_virtual_display_linker.py`
 - launch the script `./vnc_virtual_display_linker.py`
-- press `s` to start the VNC server with the default configuration
-- `ctrl-c` to stop the server
-- follow the instructions on the screen for more functionalities
+- on the menu:
+  - press `a` to activate the adbc connection
+  - press `n` to create a new virtual monitor
+  - press `s` to start the VNC server with the default configuration
+    - `ctrl-c` to stop the server
+  - follow the instructions on the screen for more functionalities
 
 Once the server has started, on your device:
 - launch a VNC client like bVNC Free: https://play.google.com/store/apps/details?id=com.iiordanov.freebVNC&hl=it
