@@ -13,6 +13,9 @@ I have it working using Ubuntu 16.04 and an Android tablet
 then create a password!  
 `x11vnc -storepasswd`
 
+## UBUNTU 18.04
+Something changed with this Ubuntu release, try this solution: https://github.com/mrenrich84/vnc_virtual_display_linker/issues/4#issuecomment-447587604
+
 ## USAGE
 - place the script anywhere
 - you might have to grant exec permissions: `chmod +x vnc_virtual_display_linker.py`
