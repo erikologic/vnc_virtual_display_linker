@@ -6,6 +6,8 @@ i.e. use your tablet to extend your desktop
 
 I have it working using Ubuntu 16.04 and an Android tablet
 
+WARNING: This project is in very low maintenance mode while I focus on other things (such as my day job). Pull requests are welcome but I won't guarantee that I will fix reported issues.
+
 ## INSTALLATION:
 `pip install dotmap`  
 `sudo apt install x11vnc`
