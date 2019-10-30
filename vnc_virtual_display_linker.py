@@ -93,7 +93,7 @@ class ScreenManager:
         self.conf[self.get_orientation].is_monitor_created = False
 
     def start_vnc(self):
-        os.system("x11vnc -nocursorshape -nocursorpos -noxinerama -solid -repeat -forever -clip " + self.conf[self.get_orientation()].x11vnc_clip)
+        os.system("x11vnc -usepw -nocursorshape -nocursorpos -noxinerama -solid -repeat -forever -clip " + self.conf[self.get_orientation()].x11vnc_clip)
 
     def toggle_orientation(self):
         self.delete_monitor()
