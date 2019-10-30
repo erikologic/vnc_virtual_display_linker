@@ -43,8 +43,7 @@ VIRTUAL_MONITOR_LENGTH = 800
 # =======================
 
 # Import the modules needed to run the script.
-import sys, os, subprocess, re
-from dotmap import DotMap
+import sys, os, subprocess, re, types
 
 # Main definition - constants
 menu_actions  = {}
@@ -56,12 +55,10 @@ class ScreenManager:
     def __init__(self):
         self.is_landscape = True
 
-        self.conf = DotMap()
-        self.conf.pc_monitor.width = PC_MONITOR_WIDTH
-        self.conf.pc_monitor.length = PC_MONITOR_LENGTH
-        self.conf.virtual_monitor.width = VIRTUAL_MONITOR_WIDTH
-        self.conf.virtual_monitor.length = VIRTUAL_MONITOR_LENGTH
-        self.conf[self.get_orientation].is_monitor_created = False
+        self.conf = types.SimpleNamespace()
+        self.conf.pc_monitor = types.SimpleNamespace(width = PC_MONITOR_WIDTH, length = PC_MONITOR_LENGTH)
+        self.conf.virtual_monitor = types.SimpleNamespace(width = VIRTUAL_MONITOR_WIDTH, length = VIRTUAL_MONITOR_LENGTH)
+        self.conf.state = types.SimpleNamespace(is_monitor_created = False, xrandr_mode=types.SimpleNamespace())
 
         self.new_monitor()
 
@@ -74,26 +71,25 @@ class ScreenManager:
         else:
             self.set_xrandr_mode_and_x11vnc_clip(conf.virtual_monitor.length, conf.virtual_monitor.width)
 
-        conf[orientation].xrandr_mode.alias = self.get_xrandr_mode_alias(conf[orientation].xrandr_mode.data)
+        conf.state.xrandr_mode.alias = self.get_xrandr_mode_alias(conf.state.xrandr_mode.data)
 
-        os.system("xrandr --newmode " + conf[orientation].xrandr_mode.data + " -hsync +vsync")
-        os.system("xrandr --addmode VIRTUAL1 " + conf[orientation].xrandr_mode.alias)
-        os.system("xrandr --output VIRTUAL1 --mode " + conf[orientation].xrandr_mode.alias)
+        os.system("xrandr --newmode " + conf.state.xrandr_mode.data + " -hsync +vsync")
+        os.system("xrandr --addmode VIRTUAL1 " + conf.state.xrandr_mode.alias)
+        os.system("xrandr --output VIRTUAL1 --mode " + conf.state.xrandr_mode.alias)
         os.system('xrandr')
 
-        self.conf[self.get_orientation].is_monitor_created = True
+        self.conf.state.is_monitor_created = True
 
     def delete_monitor(self):
-        orientation = self.get_orientation()
         conf = self.conf
 
         os.system("xrandr --output VIRTUAL1 --off")
-        os.system("xrandr --delmode VIRTUAL1 " + conf[orientation].xrandr_mode.alias)
+        os.system("xrandr --delmode VIRTUAL1 " + conf.state.xrandr_mode.alias)
         os.system('xrandr')
-        self.conf[self.get_orientation].is_monitor_created = False
+        self.conf.state.is_monitor_created = False
 
     def start_vnc(self):
-        os.system("x11vnc -usepw -nocursorshape -nocursorpos -noxinerama -solid -repeat -forever -clip " + self.conf[self.get_orientation()].x11vnc_clip)
+        os.system("x11vnc -usepw -nocursorshape -nocursorpos -noxinerama -solid -repeat -forever -clip " + self.conf.state.x11vnc_clip)
 
     def toggle_orientation(self):
         self.delete_monitor()
@@ -126,8 +122,8 @@ class ScreenManager:
         return "{0}x{1}+{2}+0".format(width, length, pc_monitor_width)
 
     def set_xrandr_mode_and_x11vnc_clip(self, width, length):
-        self.conf[self.get_orientation()].xrandr_mode.data = self.get_xrandr_mode_data( width, length)
-        self.conf[self.get_orientation()].x11vnc_clip =      self.get_clip_param(       width, length, self.conf.pc_monitor.width)
+        self.conf.state.xrandr_mode.data = self.get_xrandr_mode_data( width, length)
+        self.conf.state.x11vnc_clip =      self.get_clip_param(       width, length, self.conf.pc_monitor.width)
 
     def configure_resolution_helper(self, text, var):
         print(text + " [" +  str(var) + ']:')
@@ -151,7 +147,7 @@ def main_menu():
         print("\tVirtual:\t" + str(screen_manager.conf.virtual_monitor.width) + 'x' + str(screen_manager.conf.virtual_monitor.length))
         print()
         print("\tOrientation: " + screen_manager.get_orientation())
-        print("\tCreated 2nd monitor: " + str(screen_manager.conf[screen_manager.get_orientation].is_monitor_created))
+        print("\tCreated 2nd monitor: " + str(screen_manager.conf.state.is_monitor_created))
         print()
         print("Please choose an action:")
         print("N. New monitor")
