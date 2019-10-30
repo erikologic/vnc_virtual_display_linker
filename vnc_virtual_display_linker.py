@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #title           :vnc_virtual_display_linker.py
 #description     :This program creates a second screen and start a VNC sever offering it
@@ -115,7 +115,7 @@ class ScreenManager:
 
     # PRIVATE
     def get_xrandr_mode_data(self, width, length):
-        for line in subprocess.check_output("gtf {0} {1} 60".format(width, length), shell=True).split("\n"):
+        for line in subprocess.check_output("gtf {0} {1} 60".format(width, length), shell=True, universal_newlines=True).split("\n"):
             if "Mode" in line:
                 return re.sub(r'Modeline (.*)-HSync.*', r'\1', line).strip()
 
@@ -130,8 +130,8 @@ class ScreenManager:
         self.conf[self.get_orientation()].x11vnc_clip =      self.get_clip_param(       width, length, self.conf.pc_monitor.width)
 
     def configure_resolution_helper(self, text, var):
-        print text + " [" +  str(var) + ']:'
-        choice = raw_input(" >>  ").strip()
+        print(text + " [" +  str(var) + ']:')
+        choice = input(" >>  ").strip()
         return choice if choice != '' else var
 
 # =======================
@@ -144,37 +144,37 @@ def main_menu():
     while True:
         os.system('clear')
 
-        print "WELCOME TO THE AUTOMAGICALLY 2ND DISPLAY LINKER"
-        print "Current status:"
-        print "\tResolutions:"
-        print "\tYour monitor:\t" + str(screen_manager.conf.pc_monitor.width) + 'x' + str(screen_manager.conf.pc_monitor.length)
-        print "\tVirtual:\t" + str(screen_manager.conf.virtual_monitor.width) + 'x' + str(screen_manager.conf.virtual_monitor.length)
-        print
-        print "\tOrientation: " + screen_manager.get_orientation()
-        print "\tCreated 2nd monitor: " + str(screen_manager.conf[screen_manager.get_orientation].is_monitor_created)
-        print
-        print "Please choose an action:"
-        print "N. New monitor"
-        print "D. Delete monitor"
-        print "T. Toggle landscape / portrait"
-        print "S. Start VNC"
-        print "C. Configure the resolution of the monitors"
-        print "A. Activate ADB port forwarding"
-        print "Q. Quit"
+        print("WELCOME TO THE AUTOMAGICALLY 2ND DISPLAY LINKER")
+        print("Current status:")
+        print("\tResolutions:")
+        print("\tYour monitor:\t" + str(screen_manager.conf.pc_monitor.width) + 'x' + str(screen_manager.conf.pc_monitor.length))
+        print("\tVirtual:\t" + str(screen_manager.conf.virtual_monitor.width) + 'x' + str(screen_manager.conf.virtual_monitor.length))
+        print()
+        print("\tOrientation: " + screen_manager.get_orientation())
+        print("\tCreated 2nd monitor: " + str(screen_manager.conf[screen_manager.get_orientation].is_monitor_created))
+        print()
+        print("Please choose an action:")
+        print("N. New monitor")
+        print("D. Delete monitor")
+        print("T. Toggle landscape / portrait")
+        print("S. Start VNC")
+        print("C. Configure the resolution of the monitors")
+        print("A. Activate ADB port forwarding")
+        print("Q. Quit")
 
         while True:
-            choice = raw_input(" >>  ").lower()
+            choice = input(" >>  ").lower()
             if choice == 'q':
                 sys.exit()
             else:
                 try:
                     func = getattr(screen_manager, menu_actions[choice])
                     func()
-                    print "\n\n\nPress ENTER to continue"
-                    raw_input()
+                    print("\n\n\nPress ENTER to continue")
+                    input()
                     break
                 except KeyError:
-                    print "Invalid selection, please try again.\n"
+                    print("Invalid selection, please try again.\n")
 # =======================
 #    MENUS DEFINITIONS
 # =======================
