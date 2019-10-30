@@ -7,7 +7,7 @@
 #version         :0.1
 #usage           :vnc_virtual_display_linker.py
 #notes           :
-#python_version  :2.7.6
+#python_version  :3.5.1
 #=======================================================================
 
 ## README !!!
@@ -18,7 +18,6 @@
 ## I have it working using Ubuntu 16.04
 
 ## INSTALLATION:
-## $ pip install dotmap
 ## $ sudo apt install x11vnc
 ## then create a password!
 ## $ x11vnc -storepasswd
