@@ -7,7 +7,7 @@ i.e. use your tablet to extend your desktop
 I have it working using Ubuntu 16.04 and an Android tablet
 
 ### WARNING
-This project is NOT MAINTAINED anymore.
+This project is NOT MAINTAINED anymore.  
 Maintainers or pull requests are welcome!
 
 ## INSTALLATION:
