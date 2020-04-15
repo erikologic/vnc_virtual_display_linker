@@ -7,7 +7,8 @@ i.e. use your tablet to extend your desktop
 I have it working using Ubuntu 16.04 and an Android tablet
 
 ### WARNING
-This project is in very low maintenance mode while I focus on other things (such as my day job). Pull requests are welcome but I won't guarantee that I will fix reported issues.
+This project is NOT MAINTAINED anymore.
+Maintainers or pull requests are welcome!
 
 ## INSTALLATION:
 `sudo apt install x11vnc`
@@ -15,8 +16,8 @@ This project is in very low maintenance mode while I focus on other things (such
 then create a password!  
 `x11vnc -storepasswd`
 
-## UBUNTU 18.04
-Something changed with this Ubuntu release, try this solution: https://github.com/mrenrich84/vnc_virtual_display_linker/issues/4#issuecomment-447587604
+## TROUBLESHOOTING `xrandr: cannot find output "VIRTUAL1"`
+https://github.com/mrenrich84/vnc_virtual_display_linker/issues/4#issuecomment-447587604
 
 ## USAGE
 - place the script anywhere
